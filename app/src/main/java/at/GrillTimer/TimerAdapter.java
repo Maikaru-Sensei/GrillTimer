@@ -3,6 +3,7 @@ package at.GrillTimer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -27,6 +28,7 @@ public class TimerAdapter extends RecyclerView.Adapter<TimerAdapter.TimerHolder>
         Timer timer = listOfTimers.get(position);
         holder.textViewTimerName.setText(timer.getName());
         holder.textViewTimerTime.setText(timer.getFormatTime());
+        holder.switchActive.setChecked(timer.getActive());
     }
 
     @Override
@@ -42,11 +44,13 @@ public class TimerAdapter extends RecyclerView.Adapter<TimerAdapter.TimerHolder>
     class TimerHolder extends RecyclerView.ViewHolder {
         private TextView textViewTimerName;
         private TextView textViewTimerTime;
+        private Switch switchActive;
 
         public TimerHolder(@NonNull View itemView) {
             super(itemView);
             textViewTimerName = itemView.findViewById(R.id.text_view_timer_name);
             textViewTimerTime = itemView.findViewById(R.id.text_view_timer_time);
+            switchActive = itemView.findViewById(R.id.switch_timer_active);
         }
     }
 }

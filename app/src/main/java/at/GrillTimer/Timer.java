@@ -1,6 +1,7 @@
 package at.GrillTimer;
 
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "timer_table")
@@ -11,12 +12,13 @@ public class Timer {
 
     private String name;
     private int seconds;
-    private int active;
+    private boolean active;
 
+    @Ignore
     public Timer() {
     }
 
-    public Timer(String name, int seconds, int active) {
+    public Timer(String name, int seconds, boolean active) {
         this.name = name;
         this.seconds = seconds;
         this.active = active;
@@ -55,11 +57,11 @@ public class Timer {
         this.seconds = seconds;
     }
 
-    public int getActive() {
+    public boolean getActive() {
         return active;
     }
 
-    public void setActive(int active) {
+    public void setActive(boolean active) {
         this.active = active;
     }
 }
