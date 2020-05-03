@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="8dp">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="8dp">
+
+        <TextView
+            android:id="@+id/text_view_timer_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/timer_name"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large">
+        </TextView>
+
+        <TextView
+            android:id="@+id/text_view_timer_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_toEndOf="@id/text_view_timer_name"
+            android:layout_marginLeft="50dp"
+            android:text="@string/timer_time"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large">
+        </TextView>
+
+    </RelativeLayout>
+
+</com.google.android.material.card.MaterialCardView>
