@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import androidx.lifecycle.LiveData;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import at.GrillTimer.Timer;
 
@@ -36,12 +37,23 @@ public class TimerRepository {
         return allTimers;
     }
 
+    public Timer getTimer(int id) {
+        try {
+            return new GetTimerAsyncTask(timerDao).execute(id).get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     private static class InsertAsyncTask extends AsyncTask<Timer, Void, Void> {
 
         private TimerDao timerDao;
 
-        public InsertAsyncTask(TimerDao dishDao) {
-            this.timerDao = dishDao;
+        public InsertAsyncTask(TimerDao timerDao) {
+            this.timerDao = timerDao;
         }
 
         @Override
@@ -78,6 +90,20 @@ public class TimerRepository {
         protected Void doInBackground(Timer... timers) {
             timerDao.delete(timers[0]);
             return null;
+        }
+    }
+
+    private static class GetTimerAsyncTask extends AsyncTask<Integer, Void, Timer> {
+
+        private TimerDao timerDao;
+
+        public GetTimerAsyncTask(TimerDao dishDao) {
+            this.timerDao = dishDao;
+        }
+
+        @Override
+        protected Timer doInBackground(Integer... ints) {
+            return timerDao.getTimer(ints[0]);
         }
     }
 }

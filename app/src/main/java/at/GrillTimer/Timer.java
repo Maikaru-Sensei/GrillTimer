@@ -13,15 +13,17 @@ public class Timer {
     private String name;
     private int seconds;
     private boolean active;
+    private boolean repeating;
 
     @Ignore
     public Timer() {
     }
 
-    public Timer(String name, int seconds, boolean active) {
+    public Timer(String name, int seconds, boolean active, boolean repeating) {
         this.name = name;
         this.seconds = seconds;
         this.active = active;
+        this.repeating = repeating;
     }
 
     public String getFormatTime() {
@@ -63,5 +65,13 @@ public class Timer {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public boolean getRepeating() {
+        return repeating;
+    }
+
+    public void setRepeating(boolean repeating) {
+        this.repeating = repeating;
     }
 }

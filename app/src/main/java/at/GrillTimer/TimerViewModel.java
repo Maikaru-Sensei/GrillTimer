@@ -36,4 +36,8 @@ public class TimerViewModel extends AndroidViewModel {
     public LiveData<List<Timer>> getAllTimers() {
         return allTimers;
     }
+
+    public Timer getTimer(int id) {
+        return repository.getTimer(id);
+    }
 }

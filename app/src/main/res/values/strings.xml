@@ -3,4 +3,6 @@
     <string name="timer_name">Name</string>
     <string name="timer_time">Time</string>
     <string name="timer_active">Active</string>
+    <string name="timer_repeating">Wiederholung</string>
+    <string name="new_timer_title">Neuer Timer</string>
 </resources>

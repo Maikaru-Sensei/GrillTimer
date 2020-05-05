@@ -6,35 +6,55 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         android:padding="8dp"
         android:background="@drawable/border">
 
-        <TextView
-            android:id="@+id/text_view_timer_name"
+        <LinearLayout
+            android:id="@+id/start_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/timer_name"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large">
-        </TextView>
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/text_view_timer_time"
-            android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/text_view_timer_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/timer_time"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textSize="36sp">
+            </TextView>
+
+            <TextView
+                android:id="@+id/text_view_timer_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/timer_name"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large">
+            </TextView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/text_view_timer_name"
-            android:layout_marginStart="100dp"
-            android:text="@string/timer_time"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large">
-        </TextView>
+            android:orientation="vertical"
+            android:layout_toEndOf="@id/start_layout"
+            android:layout_marginStart="170dp"
+            android:layout_marginTop="10dp">
 
-        <Switch
-            android:id="@+id/switch_timer_active"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/text_view_timer_time"
-            android:layout_marginStart="120dp" />
+            <Switch
+                android:id="@+id/switch_timer_active"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
 
+            <CheckBox
+                android:id="@+id/checkBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:text="@string/timer_repeating" />
+
+        </LinearLayout>
 
     </RelativeLayout>
 

@@ -25,4 +25,7 @@ public interface TimerDao {
 
     @Query("SELECT * FROM timer_table ORDER BY id desc")
     LiveData<List<Timer>> getAllTimers();
+
+    @Query("SELECT * FROM timer_table where id = :timer_id")
+    Timer getTimer(int timer_id);
 }
