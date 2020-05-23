@@ -22,16 +22,16 @@
                 android:layout_height="wrap_content"
                 android:text="@string/timer_time"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textSize="36sp">
-            </TextView>
+                android:textColor="#FFFFFF"
+                android:textSize="36sp"></TextView>
 
             <TextView
                 android:id="@+id/text_view_timer_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/timer_name"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large">
-            </TextView>
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColor="#FFFFFF"></TextView>
         </LinearLayout>
 
         <LinearLayout
@@ -52,7 +52,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:clickable="false"
-                android:text="@string/timer_repeating" />
+                android:text="@string/timer_repeating"
+                android:textColor="#FFFFFF" />
 
         </LinearLayout>
 

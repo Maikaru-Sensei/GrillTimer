@@ -5,4 +5,6 @@
     <string name="timer_active">Active</string>
     <string name="timer_repeating">Wiederholung</string>
     <string name="new_timer_title">Neuer Timer</string>
+    <string name="time_seperator">:</string>
+    <string name="time_init">00</string>
 </resources>

@@ -31,11 +31,90 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="wrap_content"
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:background="@color/colorDark"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appBarLayout"/>
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="2dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="@id/constraintLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:paddingStart="100dp"
+                android:paddingTop="20dp"
+                android:paddingEnd="100dp">
+
+                <EditText
+                    android:id="@+id/editText_hour"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="number"
+                    android:maxLength="2"
+                    android:selectAllOnFocus="true"
+                    android:text="@string/time_init"
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#FFFFFF"
+                    android:textSize="30sp" />
+
+                <TextView
+                    android:id="@+id/timeSep1"
+                    android:layout_width="10dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/time_seperator"
+                    android:textColor="#FFFFFF"
+                    android:textSize="36sp" />
+
+                <EditText
+                    android:id="@+id/editText_min"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="number"
+                    android:maxLength="2"
+                    android:selectAllOnFocus="true"
+                    android:text="@string/time_init"
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#FFFFFF"
+                    android:textSize="30sp" />
+
+                <TextView
+                    android:id="@+id/timeSep2"
+                    android:layout_width="10dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/time_seperator"
+                    android:textColor="#FFFFFF"
+                    android:textSize="36sp" />
+
+                <EditText
+                    android:id="@+id/editText_sec"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="number"
+                    android:maxLength="2"
+                    android:selectAllOnFocus="true"
+                    android:text="@string/time_init"
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#FFFFFF"
+                    android:textSize="30sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
