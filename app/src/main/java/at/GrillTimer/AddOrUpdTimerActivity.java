@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.LiveData;
 
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.text.InputFilter;
@@ -12,7 +14,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.TimePicker;
 
 import java.util.List;
@@ -26,7 +30,9 @@ public class AddOrUpdTimerActivity extends AppCompatActivity {
     private TimerRepository timerRepository;
     private final String TAG = "AddOrUpdTimerActivity";
     private String title;
-    private EditText editTextHour, editTextMin, editTextSec;
+    private EditText editTextMin, editTextSec, editTextName;
+    private CheckBox checkBoxRepeat;
+    private TextView textViewError;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +44,12 @@ public class AddOrUpdTimerActivity extends AppCompatActivity {
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close_black_24dp);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.inflateMenu(R.menu.menu_add_upd_timer);
+
+        editTextMin = findViewById(R.id.editText_min);
+        editTextSec = findViewById(R.id.editText_sec);
+        editTextName = findViewById(R.id.editText_name);
+        checkBoxRepeat = findViewById(R.id.checkBox_repeat);
+        textViewError = findViewById(R.id.textViewError);
         
         Bundle bundle = getIntent().getExtras();
         int timer_id = bundle.getInt("TIMER_ID");
@@ -49,6 +61,7 @@ public class AddOrUpdTimerActivity extends AppCompatActivity {
         if (timer_id > -1) {
             timer = timerRepository.getTimer(timer_id);
             title = "Edit Timer";
+            initValues(timer);
         }
         else {
             timer = null;
@@ -56,10 +69,6 @@ public class AddOrUpdTimerActivity extends AppCompatActivity {
         }
 
         toolbar.setTitle(title);
-
-        editTextHour = findViewById(R.id.editText_hour);
-        editTextMin = findViewById(R.id.editText_min);
-        editTextSec = findViewById(R.id.editText_sec);
     }
 
     @Override
@@ -72,13 +81,40 @@ public class AddOrUpdTimerActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
-        if (timer == null || item.getItemId() == 16908332 /* back button */) {
+        if (item.getItemId() == 16908332 /* back button */) {
             goBackToMainScreen();
         }
         else {
             if (item.getItemId() == R.id.save_timer) {
-                // create new timer and insert
-                timerRepository.insert(timer);
+                // validate values
+                if (validValues()) {
+                    boolean isNewTimer = false;
+
+                    if (timer == null) {
+                        timer = new Timer();
+                        isNewTimer = true;
+                    }
+
+                    timer.setName(editTextName.getText().toString());
+                    timer.setSeconds(calculateSeconds());
+                    timer.setActive(false);
+                    timer.setRepeating(checkBoxRepeat.isChecked());
+
+                    Log.d(TAG, timer.getName() + ";" + timer.getSeconds());
+
+                    // create new timer object and insert/update
+                    if (isNewTimer) {
+                        timerRepository.insert(timer);
+                    }
+                    else {
+                        timerRepository.update(timer);
+                    }
+
+                    goBackToMainScreen();
+                }
+                else {
+                    return false;
+                }
             }
             else if (item.getItemId() == R.id.delete_timer) {
                 Log.d(TAG, "delete timer with Id: " + timer.getId());
@@ -92,8 +128,46 @@ public class AddOrUpdTimerActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    private boolean validValues() {
+        int min = Integer.parseInt(editTextMin.getText().toString());
+        int sec = Integer.parseInt(editTextSec.getText().toString());
+
+        if (min > 59) {
+            textViewError.setText("Minuten zu hoch");
+            return false;
+        }
+        else if (sec > 59) {
+            textViewError.setText("Sekunden zu hoch");
+            return false;
+        }
+
+        return true;
+    }
+
     private void goBackToMainScreen() {
         onBackPressed();
         finish();
+    }
+
+    private void initValues(Timer timer) {
+        String min, sec;
+
+        min = String.valueOf(timer.getMinutes());
+        sec = String.valueOf(timer.getSecs());
+
+        min = min.length() < 2 ? "0" + min : min;
+        sec = sec.length() < 2 ? "0" + sec : sec;
+
+        editTextMin.setText(min);
+        editTextSec.setText(sec);
+        editTextName.setText(timer.getName());
+        checkBoxRepeat.setChecked(timer.getRepeating());
+    }
+
+    private int calculateSeconds() {
+        int min = Integer.parseInt(editTextMin.getText().toString());
+        int sec = Integer.parseInt(editTextSec.getText().toString());
+
+        return min * 60 + sec;
     }
 }

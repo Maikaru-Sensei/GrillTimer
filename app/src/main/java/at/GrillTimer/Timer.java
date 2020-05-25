@@ -35,6 +35,18 @@ public class Timer {
         return min + ":" + sec;
     }
 
+    public int getHours() {
+        return this.seconds / 3600;
+    }
+
+    public int getMinutes() {
+        return this.seconds / 60;
+    }
+
+    public int getSecs() {
+        return this.seconds%60;
+    }
+
     public int getId() {
         return id;
     }
