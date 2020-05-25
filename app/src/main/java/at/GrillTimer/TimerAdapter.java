@@ -2,9 +2,11 @@ package at.GrillTimer;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -15,8 +17,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TimerAdapter extends RecyclerView.Adapter<TimerAdapter.TimerHolder> {
+
     private List<Timer> listOfTimers = new ArrayList<>();
     private Context context;
+    private OnTimerActivatedListener onTimerActivatedListener;
 
     @NonNull
     @Override
@@ -43,6 +47,17 @@ public class TimerAdapter extends RecyclerView.Adapter<TimerAdapter.TimerHolder>
                 context.startActivity(intent);
             }
         });
+
+        holder.switchActive.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    if (onTimerActivatedListener != null) {
+                        onTimerActivatedListener.onTimerActivated(timer);
+                    }
+                }
+            }
+        });
     }
 
     @Override
@@ -55,7 +70,9 @@ public class TimerAdapter extends RecyclerView.Adapter<TimerAdapter.TimerHolder>
         notifyDataSetChanged();
     }
 
-
+    public void setOnTimerActivatedListener(OnTimerActivatedListener l) {
+        onTimerActivatedListener = l;
+    }
 
     class TimerHolder extends RecyclerView.ViewHolder {
         private TextView textViewTimerName;
