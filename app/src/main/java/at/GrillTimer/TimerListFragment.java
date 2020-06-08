@@ -24,6 +24,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
+import at.GrillTimer.DB.TimerRepository;
+
 public class TimerListFragment extends Fragment {
 
     private final String TAG = "TimerListFragment";

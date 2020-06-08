@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="at.GrillTimer">
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
     <application
@@ -19,6 +20,15 @@
         </activity>
 
         <service android:name=".TimerService" />
-    </application>
+        <provider
+            android:name="androidx.work.impl.WorkManagerInitializer"
+            android:authorities="${applicationId}.workmanager-init"
+            tools:node="remove" />
 
+        <receiver android:name=".TimerCancelBroadcast"  android:exported="true">
+            <intent-filter>
+                <action android:name="TIMER_CANCEL" />
+            </intent-filter>
+        </receiver>
+    </application>
 </manifest>
