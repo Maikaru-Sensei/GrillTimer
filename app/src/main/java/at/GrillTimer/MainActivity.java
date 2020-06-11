@@ -35,6 +35,8 @@ public class MainActivity extends AppCompatActivity implements TimerListFragment
 
             timer.setActive(false);
             timerRepository.update(timer);
+
+            TimerService.IS_CANCELLED = true;
         }
     };
 

@@ -96,7 +96,8 @@ public class AddOrUpdTimerActivity extends AppCompatActivity {
                     }
 
                     timer.setName(editTextName.getText().toString());
-                    timer.setSeconds(calculateSeconds());
+                    timer.setMinutes(Integer.parseInt(editTextMin.getText().toString()));
+                    timer.setSeconds(Integer.parseInt(editTextSec.getText().toString()));
                     timer.setActive(false);
                     timer.setRepeating(checkBoxRepeat.isChecked());
 
@@ -136,8 +137,8 @@ public class AddOrUpdTimerActivity extends AppCompatActivity {
             textViewError.setText("Minuten zu hoch");
             return false;
         }
-        else if (sec > 59) {
-            textViewError.setText("Sekunden zu hoch");
+        else if (sec > 59 || sec == 0) {
+            textViewError.setText("Sekunden nicht gültig");
             return false;
         }
 

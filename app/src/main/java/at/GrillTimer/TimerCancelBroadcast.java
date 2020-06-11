@@ -14,8 +14,8 @@ public class TimerCancelBroadcast extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         Log.d(TAG, "onReceive: Cancel timer");
-        // back to MainActivity and stop timerService
 
+        // back to MainActivity and stop timerService
         if (intent == null) {
             return;
         }
